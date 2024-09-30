@@ -120,7 +120,7 @@ filmy.forEach((film)=>
 	  <div class="card-body">
 		<h5 class="card-title">${film.nazev}</h5>
 		<p class="card-text">${film.ochutnavka}</p>
-		<a href="film.html" class="btn btn-primary">Přehrát</a>
+		<a href="film.html#${film.id}" class="btn btn-primary">Přehrát</a>
 	  </div>
 	</div>
   </div>`
