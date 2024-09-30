@@ -245,3 +245,29 @@ filmy.forEach((film) => {
 		`;
   }
 });
+
+const stars = document.querySelectorAll(`.fa-star`);
+let savedMovieRatingIndex;
+
+const userMovieRating = (index) => {
+  stars.forEach((star, i) => {
+    if (i <= index) {
+      star.classList.remove(`far`);
+      star.classList.add(`fas`);
+    } else {
+      star.classList.remove(`fas`);
+      star.classList.add(`far`);
+    }
+  });
+};
+
+stars.forEach((star, index) => {
+  star.addEventListener(`mouseenter`, () => userMovieRating(index));
+  star.addEventListener(`mouseleave`, () =>
+    userMovieRating(savedMovieRatingIndex)
+  );
+  star.addEventListener(`click`, () => {
+    savedMovieRatingIndex = index;
+    userMovieRating(index);
+  });
+});
