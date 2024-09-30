@@ -122,6 +122,8 @@ filmy.forEach((film) => {
     premierDayText = `což bylo pred ${Math.abs(diffPremierDays)} dny`;
   }
 
+  // Display selected movie details
+
   if (film.id === movieSelectedId) {
     document.querySelector("#detail-filmu").innerHTML = `
 				<div class="row g-0">
@@ -194,8 +196,7 @@ filmy.forEach((film) => {
 												id="message-input"
 												rows="4"
 											></textarea>
-											<label class="form-label" for="message-input"
-												>Text poznámky</label
+											<label class="form-label" for="message-input">Text poznámky</label
 											>
 										</div>
 									</div>
@@ -246,6 +247,8 @@ filmy.forEach((film) => {
   }
 });
 
+// Rate a movie
+
 const stars = document.querySelectorAll(`.fa-star`);
 let savedMovieRatingIndex;
 
@@ -271,3 +274,39 @@ stars.forEach((star, index) => {
     userMovieRating(index);
   });
 });
+
+// Leave comment
+
+const feedbackForm = document.querySelector(`#note-form`);
+
+const formSubmit = (event) => {
+  event.preventDefault();
+
+  const userInputText = document.querySelector(`#message-input`);
+  const userTermsConditions = document.querySelector(`#terms-checkbox`);
+
+  userInputText.classList.remove("is-invalid");
+  userTermsConditions.classList.remove("is-invalid");
+
+  const userInputValue = userInputText.value.trim();
+
+  let isValid = true;
+
+  if (userInputValue.length === 0) {
+    userInputText.classList.add("is-invalid");
+    userInputText.focus();
+    isValid = false;
+  }
+
+  if (!userTermsConditions.checked) {
+    userTermsConditions.classList.add("is-invalid");
+    userTermsConditions.focus();
+    isValid = false;
+  }
+
+  if (isValid) {
+    feedbackForm.innerHTML = `<p class="card-text">${userInputValue}</p>`;
+  }
+};
+
+feedbackForm.addEventListener("submit", formSubmit);
